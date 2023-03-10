@@ -17,8 +17,7 @@ menu = 'start'
 
 win = Screen()
 win.setup(600,600)
-win.title('GALAXY BALST')
-win.fav
+win.title('GALAXY BLAST')
 win.bgpic("imgs/background.gif")
 win.addshape('sprites/spaceship.gif')
 win.addshape('sprites/asteroid.gif')
@@ -43,7 +42,9 @@ def start_game():
 
 
 win.onkeypress(user.move_left, 'a')
+win.onkeypress(user.move_left, 'Left')
 win.onkeypress(user.move_right, 'd')
+win.onkeypress(user.move_right, 'Right')
 win.onkeypress(user.shoot, "space")
 win.onkeypress(start_game, 'Control_L')
 win.listen()
