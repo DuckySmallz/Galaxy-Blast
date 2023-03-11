@@ -5,6 +5,7 @@
 from packages import *
 from turtle import *
 from time import sleep
+from playsound import playsound
 
 
 save = open('data/highscore.txt', mode = 'r')
@@ -40,12 +41,17 @@ def start_game():
     global menu
     menu = 'play'
 
+def shoot():
+    global user
+    user.shoot()
+    playsound('data/laser.mp3', False)
+
 
 win.onkeypress(user.move_left, 'a')
 win.onkeypress(user.move_left, 'Left')
 win.onkeypress(user.move_right, 'd')
 win.onkeypress(user.move_right, 'Right')
-win.onkeypress(user.shoot, "space")
+win.onkeypress(shoot, "space")
 win.onkeypress(start_game, 'Control_L')
 win.listen()
 
@@ -59,6 +65,7 @@ while True:
     splash.undraw()
     user.restart()
     roids.restart()
+    interface.draw()
 
     while menu == 'play':
 
@@ -71,6 +78,7 @@ while True:
             for asteroid in roids.asteroids:
                 if laser.xcor() >= asteroid.xcor() - 30 and laser.xcor() <= asteroid.xcor() + 30:
                     if laser.ycor() >= asteroid.ycor() - 30:
+                        playsound('data/explosion.mp3', False)
                         asteroid.clear()
                         asteroid.hideturtle()
                         roids.asteroids.remove(asteroid)
